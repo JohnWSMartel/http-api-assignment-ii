@@ -1,0 +1,36 @@
+{
+  "name": "http-api-assignment-ii",
+  "version": "1.0.0",
+  "engines": {
+    "node": "11.7.0",
+    "npm": "6.5.0"
+  },
+  "description": "This project builds a HTTP API using GET, HEAD, and Post.",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+	"pretest": "eslint ./src --fix",
+	"nodemon": "nodemon --watch ./src --watch ./hosted ./src/server.js",
+	"build":"babel ./client --out0file ./hosted/bundle.js",
+	"watch":"babel --watch ./client --out-file ./hosted/bundle.js",
+    "test": "echo \"No Tests\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohnWSMartel/http-api-assignment-ii.git"
+  },
+  "author": "John Martel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohnWSMartel/http-api-assignment-ii/issues"
+  },
+  "homepage": "https://github.com/JohnWSMartel/http-api-assignment-ii#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
