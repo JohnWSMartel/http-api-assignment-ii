@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-const query = require('querystring');
+// const query = require('querystring');
 const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./jsonResponses.js');
 
@@ -20,7 +20,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const onRequest = (request, response) => {
   console.log(request.url);
   const parsedUrl = url.parse(request.url);
-  const params = query.parse(parsedUrl.query);
+  //const params = query.parse(parsedUrl.query);
 
   switch (request.method) {
     case 'GET':
@@ -45,9 +45,9 @@ const onRequest = (request, response) => {
     case 'HEAD':
       if (parsedUrl.pathname === '/getUsers') {
         jsonHandler.success(request, response);
-      } else if(parsedUrl.pathname === '/notReal'){
-		  jsonHandler.notFound(request, response); //needs to be without response
-	  } else {
+      } else if (parsedUrl.pathname === '/notReal') {
+        jsonHandler.notFound(request, response); // needs to be without response
+      } else {
         // if not found send 404 without body
         jsonHandler.notFound(request, response);
       }

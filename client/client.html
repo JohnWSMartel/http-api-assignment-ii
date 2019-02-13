@@ -6,7 +6,75 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
+	const handleResponse = (xhr) => {
+		const content = document.querySelector('#content');     
+		const type = xhr.getResponseHeader('content-type');
+		switch(xhr.status){
+			case 200:
+				content.innerHTML = `<b>Success</b>`
+				break;
+			case 201:
+				content.innerHTML = `<b>Created</b>`
+				break;
+			case 400:
+				content.innerHTML = `<b>Bad Request</b>`
+				break;
+			case 404:
+				content.innerHTML = `<b>Not Found</b>`
+				break;
+            case 501:
+				content.innerHTML = `<b>Not Implemented</b>`
+				break;
+			case 401:
+				content.innerHTML = `<b>Unauthorized</b>`
+				break;
+			case 403:
+				content.innerHTML = `<b>Forbidden</b>`
+				break;
+            //Add status code handlers for 501, 401, 403.
+            
+			default:
+				content.innerHTML = `<b>Error code not implemented by client.</b>`
+				break;
+		}
+      
+        if(type === 'application/json') {
+          const obj = JSON.parse(xhr.response);
+          content.innerHTML += `<h2>Message: ${obj.message}</h2>`;
+        } else if (type === 'text/xml') {
+          const message = xhr.responseXML.querySelector('message').textContent;
+          content.innerHTML += `<h2>Message: ${message}</h2>`;
+        } 
+    };
 
+    const requestUpdate = (e) => {
+      const url = document.querySelector('#page').value;
+        
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", url);
+        
+      const acceptType = document.querySelector('#type');
+        xhr.setRequestHeader('Accept', acceptType);
+        
+        xhr.onload = () => handleResponse(xhr);
+        
+        
+        xhr.send();
+        
+        e.preventDefault();
+        return false;
+    };
+
+
+    const init = () => {
+      const sendButton = document.querySelector('#send');
+      
+      const sendRequest = (e) => requestUpdate(e);
+      
+      sendButton.addEventListener('click', sendRequest);
+    };
+
+    window.onload = init;
   </script>
 </head>
 <body>
