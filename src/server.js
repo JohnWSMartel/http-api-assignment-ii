@@ -20,7 +20,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const onRequest = (request, response) => {
   console.log(request.url);
   const parsedUrl = url.parse(request.url);
-  //const params = query.parse(parsedUrl.query);
+  // const params = query.parse(parsedUrl.query);
 
   switch (request.method) {
     case 'GET':
