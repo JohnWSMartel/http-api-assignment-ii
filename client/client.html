@@ -47,13 +47,16 @@
 
     const requestGETHEADUpdate = (e, form) => {
       const url = form.querySelector('#urlField').value;
-        const method = form.querySelector('methodSelect').value;
+        const method = form.querySelector('#methodSelect').value;
         
         const xhr = new XMLHttpRequest();
         xhr.open(method, url);
         
-        xhr.onload = () => handleResponse(xhr);
-        
+		if(method == 'get'){
+			xhr.onload = () => handleResponse(xhr, true);
+		} else {
+			xhr.onload = () => handleResponse(xhr, false);
+		}
         
         xhr.send();
         
@@ -88,17 +91,12 @@
     const init = () => {
       const sendName = document.querySelector('#nameForm');
         const sendUser = document.querySelector('#userForm');
-		const nameBtn = document.querySelector('#nameSub');
-		cosnt methodBtn = document.querySelector('#methodSub');
       
       const sendGETHEADRequest = (e) => requestGETHEADUpdate(e, sendUser);
         const sendPOSTRequest = (e) => requestPOSTUpdate(e,sendName);
       
-      /*sendName.addEventListener('click', sendPostRequest);
-        sendUser.addEventListener('click', sendGETHEADRequest);*/
-		
-		nameBtn.addEventListener('click',sendPOSTRequest);
-		methodBtn.addEventListener('click', sendGETHEADRequest);
+      sendName.addEventListener('submit', sendPostRequest);
+        sendUser.addEventListener('submit', sendGETHEADRequest);
     };
 
     window.onload = init;
