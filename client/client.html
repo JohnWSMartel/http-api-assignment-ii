@@ -88,12 +88,17 @@
     const init = () => {
       const sendName = document.querySelector('#nameForm');
         const sendUser = document.querySelector('#userForm');
+		const nameBtn = document.querySelector('#nameSub');
+		cosnt methodBtn = document.querySelector('#methodSub');
       
       const sendGETHEADRequest = (e) => requestGETHEADUpdate(e, sendUser);
         const sendPOSTRequest = (e) => requestPOSTUpdate(e,sendName);
       
-      sendName.addEventListener('click', sendRequest);
-        sendUser.addEventListener('click', sendRequest);
+      /*sendName.addEventListener('click', sendPostRequest);
+        sendUser.addEventListener('click', sendGETHEADRequest);*/
+		
+		nameBtn.addEventListener('click',sendPOSTRequest);
+		methodBtn.addEventListener('click', sendGETHEADRequest);
     };
 
     window.onload = init;
@@ -107,7 +112,7 @@
       <input id="nameField" type="text" name="name" />
       <label for="age">Age: </label>
       <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-      <input type="submit" value="Add User" />
+      <input id="nameSub" type="submit" value="Add User" />
     </form>
     <form id="userForm" action="/getUsers" method="get">
       <select id='urlField'>
@@ -118,7 +123,7 @@
         <option value="get">GET</option>
         <option value="head">HEAD</option>
       </select>
-      <input type="submit" value="Get User" />
+      <input id="methodSub" type="submit" value="Get User" />
     </form>
   </section>
   <section id="content">
