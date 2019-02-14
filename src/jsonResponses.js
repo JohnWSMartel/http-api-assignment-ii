@@ -63,6 +63,17 @@ const notFound = (request, response) => {
   return respondJSON(request, response, 404, responseJSON);
 };
 
+/* const users = {};
+
+const getUsers = (request, response) => {
+  const responseJSON = { users };
+
+  return respondJSON(request, response, 200, responseJSON);
+};
+
+const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200); */
+
+
 module.exports = {
   success,
   badRequest,
