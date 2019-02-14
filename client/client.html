@@ -64,6 +64,24 @@
     const requestPOSTUpdate = (e, nameForm) => {
         const nameAction =  nameForm.getAttribute('action');
 		const nameMethod = nameForm.getAttribute('method');
+		
+		const xhr = new XMLHttpRequest();
+		
+		xhr.open(nameMethod, nameAction);
+		
+		xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		
+		xhr.setRequestHeader ('Accept', 'application/json');
+		
+		xhr.onload = () => handleResponse(xhr);
+		
+		const formData = `name=${nameField.value}&age=${ageField.value}`;
+		
+		xhr.send(formData);
+		
+		e.preventDefault();
+		
+		return false;
     };
 
 
