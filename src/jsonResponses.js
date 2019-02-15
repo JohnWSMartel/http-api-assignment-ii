@@ -63,7 +63,16 @@ const notFound = (request, response) => {
   return respondJSON(request, response, 404, responseJSON);
 };
 
-/* const users = {};
+const respondJSONMeta = (request, response, status) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  response.writeHead(status, headers);
+  response.end();
+};
+
+const users = {};
 
 const getUsers = (request, response) => {
   const responseJSON = { users };
@@ -71,7 +80,9 @@ const getUsers = (request, response) => {
   return respondJSON(request, response, 200, responseJSON);
 };
 
-const getUsersMeta = (request, response) => respondJSONMeta(request, response, 200); */
+const getUsersMeta = (request, response) => {
+  respondJSONMeta(request, response, 200);
+};
 
 
 module.exports = {
@@ -81,4 +92,6 @@ module.exports = {
   forbidden,
   notImplemented,
   notFound,
+  getUsers,
+  getUsersMeta,
 };
