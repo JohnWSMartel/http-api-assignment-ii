@@ -1,6 +1,6 @@
 const http = require('http');
 const url = require('url');
-// const query = require('querystring');
+const query = require('querystring');
 const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./jsonResponses.js');
 
@@ -41,6 +41,31 @@ const onRequest = (request, response) => {
       } else {
         urlStruct.notFound(request, response, params);
       } */
+      break;
+    case 'POST':
+      if (parsedUrl.pathname === '/addUser') {
+        const res = response;
+
+        const body = [];
+
+        request.on('error', (err) => {
+          console.dir(err);
+          res.statusCode = 400;
+          res.end();
+        });
+
+        request.on('data', (chunk) => {
+          body.push(chunk);
+        });
+
+        request.on('end', () => {
+          const bodyString = Buffer.concat(body).toString();
+
+          const bodyParams = query.parse(bodyString);
+
+          jsonHandler.addUser(request, res, bodyParams);
+        });
+      }
       break;
     case 'HEAD':
       if (parsedUrl.pathname === '/getUsers') {
