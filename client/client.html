@@ -42,9 +42,8 @@
                 content.innerHTML += `<h2>${JSON.stringify(obj.users)}</h2>`;
             }
 			if(obj.message){
-				content.innerHTML += `<h2>Message: ${obj.message}</h2>;
+				content.innerHTML += `<h2>Message: ${obj.message}</h2>`;
 			}
-          content.innerHTML += `<h2>Message: ${obj.message}</h2>`;
         } else if (type === 'text/xml') {
           const message = xhr.responseXML.querySelector('message').textContent;
           content.innerHTML += `<h2>Message: ${message}</h2>`;
